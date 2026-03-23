@@ -49,13 +49,22 @@
     display: flex; align-items: center;
   }
 
-  .nav-wordmark {
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
-    font-size: 20px;
-    letter-spacing: 0.04em;
-    color: #fff;
+  .nav-links {
+    display: flex; gap: 28px; align-items: center;
   }
+
+  .nav-link {
+    font-size: 14px; color: var(--muted); text-decoration: none;
+    font-weight: 400; letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: #fff; }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+  }
+
+  /* NAV END */
 
   .nav-cta {
     background: var(--blue);
@@ -564,9 +573,11 @@
   /* RESPONSIVE */
   @media (max-width: 768px) {
     nav { padding: 16px 20px; }
+    .nav-links { display: none; }
     .how-wrap, .roi-inner { grid-template-columns: 1fr; gap: 48px; }
     .hero { padding: 100px 20px 60px; }
     footer { flex-direction: column; gap: 8px; text-align: center; }
+    .feature-row { grid-template-columns: 1fr !important; }
   }
 </style>
 </head>
@@ -582,6 +593,13 @@
       <text x="40" y="17" style="font-family:'DM Sans',sans-serif; font-weight:500; font-size:16px; fill:white; letter-spacing:0.04em;">Pulse</text>
     </svg>
   </a>
+  <div class="nav-links">
+    <a href="#problem" class="nav-link">Problem</a>
+    <a href="#how" class="nav-link">How it works</a>
+    <a href="#features" class="nav-link">Features</a>
+    <a href="#roi" class="nav-link">ROI</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </div>
   <a href="#contact" class="nav-cta">Contact us</a>
 </nav>
 
@@ -649,7 +667,7 @@
 </section>
 
 <!-- PROBLEM -->
-<section class="fade-in">
+<section id="problem" class="fade-in">
   <div class="section-label">The problem</div>
   <h2>You manage 30 clients.<br>You can't remember everything.</h2>
   <p class="section-body">You juggle dozens of clients simultaneously — each with their own history, deliverables and expectations. Today, you find out you're behind when you're already sitting in the meeting.</p>
@@ -727,8 +745,254 @@
   </div>
 </div>
 
+<!-- FEATURES -->
+<div id="features" style="background:#0d1420; border-top:1px solid rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.06);">
+  <div style="max-width:1100px; margin:0 auto; padding:100px 24px;">
+    <div style="text-align:center; margin-bottom:64px;">
+      <div class="section-label" style="justify-content:center; display:flex;">Everything you need</div>
+      <h2 style="margin-bottom:12px;">Built for account managers.<br>Loved by sales directors.</h2>
+      <p style="font-size:17px; color:var(--muted); max-width:480px; margin:0 auto;">Six features that work together to keep every client relationship healthy — automatically.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:80px;">
+
+      <!-- Feature 1: Daily digest -->
+      <div class="fade-in" style="display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;">
+        <div>
+          <div style="font-size:11px;color:#4d9fff;letter-spacing:0.1em;font-weight:500;margin-bottom:12px;">CORE FEATURE</div>
+          <h3 style="font-size:24px;font-weight:500;color:#e8edf5;margin-bottom:12px;line-height:1.3;">Daily morning digest</h3>
+          <p style="font-size:15px;color:var(--muted);line-height:1.8;">Every morning, Pulse sends you a prioritised list of the 3 clients that need your attention today — so you always start the day with a clear plan. No more guessing where to begin.</p>
+        </div>
+        <div style="background:#0d1420;border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;">
+          <div style="background:#0a0f1e;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:8px;">
+            <div style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#28c840;"></div>
+            <span style="font-size:11px;color:var(--muted);margin-left:8px;">Pulse — Good morning, Sarah</span>
+          </div>
+          <div style="padding:20px;">
+            <div style="font-size:11px;color:var(--muted);letter-spacing:0.1em;margin-bottom:14px;">TODAY'S FOCUS — MONDAY, MARCH 23</div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.2);border-radius:8px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;">
+                <div style="width:8px;height:8px;border-radius:50%;background:#dc2626;box-shadow:0 0 6px #dc262688;margin-top:4px;flex-shrink:0;"></div>
+                <div><div style="font-size:13px;font-weight:500;color:#e8edf5;">Novo Nordisk A/S</div><div style="font-size:12px;color:#f87171;margin-top:2px;">Send Q1 report before 5pm — meeting tomorrow</div></div>
+              </div>
+              <div style="background:rgba(217,119,6,0.08);border:1px solid rgba(217,119,6,0.2);border-radius:8px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;">
+                <div style="width:8px;height:8px;border-radius:50%;background:#d97706;box-shadow:0 0 6px #d9770688;margin-top:4px;flex-shrink:0;"></div>
+                <div><div style="font-size:13px;font-weight:500;color:#e8edf5;">Maersk Group</div><div style="font-size:12px;color:#fbbf24;margin-top:2px;">Traffic down 18% — schedule a call this week</div></div>
+              </div>
+              <div style="background:rgba(217,119,6,0.08);border:1px solid rgba(217,119,6,0.2);border-radius:8px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;">
+                <div style="width:8px;height:8px;border-radius:50%;background:#d97706;box-shadow:0 0 6px #d9770688;margin-top:4px;flex-shrink:0;"></div>
+                <div><div style="font-size:13px;font-weight:500;color:#e8edf5;">Vestas Wind Systems</div><div style="font-size:12px;color:#fbbf24;margin-top:2px;">No email in 14 days — send a check-in today</div></div>
+              </div>
+            </div>
+            <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.05);font-size:12px;color:var(--muted);">8 other clients — all on track ✓</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 2: Meeting prep -->
+      <div class="fade-in" style="display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;">
+        <div style="background:#0d1420;border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;">
+          <div style="background:#0a0f1e;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:8px;">
+            <div style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#28c840;"></div>
+            <span style="font-size:11px;color:var(--muted);margin-left:8px;">Pulse — Meeting Brief</span>
+          </div>
+          <div style="padding:20px;">
+            <div style="font-size:11px;color:#4d9fff;letter-spacing:0.1em;margin-bottom:6px;">TOMORROW · 10:00 AM</div>
+            <div style="font-size:15px;font-weight:500;color:#e8edf5;margin-bottom:16px;">Novo Nordisk A/S — Quarterly Review</div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:12px 14px;">
+                <div style="font-size:10px;color:var(--muted);letter-spacing:0.1em;margin-bottom:6px;">CURRENT STATUS</div>
+                <div style="font-size:13px;color:#c8d4e8;">Q1 report overdue. Traffic up 4%. Last meeting March 3 — went well.</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:12px 14px;">
+                <div style="font-size:10px;color:var(--muted);letter-spacing:0.1em;margin-bottom:6px;">YOU PROMISED LAST TIME</div>
+                <div style="font-size:13px;color:#c8d4e8;">Deliver SEO audit by end of March. Introduce new reporting format.</div>
+              </div>
+              <div style="background:rgba(26,110,245,0.08);border:1px solid rgba(26,110,245,0.2);border-radius:8px;padding:12px 14px;">
+                <div style="font-size:10px;color:#7aabff;letter-spacing:0.1em;margin-bottom:6px;">BRING UP TODAY</div>
+                <div style="font-size:13px;color:#b8ccf0;">Present Q1 results, address the traffic drop in week 9, and propose Q2 scope.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px;color:#4d9fff;letter-spacing:0.1em;font-weight:500;margin-bottom:12px;">CORE FEATURE</div>
+          <h3 style="font-size:24px;font-weight:500;color:#e8edf5;margin-bottom:12px;line-height:1.3;">Auto meeting prep</h3>
+          <p style="font-size:15px;color:var(--muted);line-height:1.8;">The day before any client meeting, Pulse generates a full briefing: current status, what you promised last time, and what to bring up. Walk in prepared — every single time.</p>
+        </div>
+      </div>
+
+      <!-- Feature 3: Activity timeline -->
+      <div class="fade-in" style="display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;">
+        <div>
+          <div style="font-size:11px;color:#4d9fff;letter-spacing:0.1em;font-weight:500;margin-bottom:12px;">CORE FEATURE</div>
+          <h3 style="font-size:24px;font-weight:500;color:#e8edf5;margin-bottom:12px;line-height:1.3;">Activity timeline</h3>
+          <p style="font-size:15px;color:var(--muted);line-height:1.8;">Every email, meeting, deliverable and result logged automatically in a single timeline per client. Never again wonder what was agreed 3 months ago.</p>
+        </div>
+        <div style="background:#0d1420;border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;">
+          <div style="background:#0a0f1e;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:8px;">
+            <div style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#28c840;"></div>
+            <span style="font-size:11px;color:var(--muted);margin-left:8px;">Pulse — Ørsted A/S · Timeline</span>
+          </div>
+          <div style="padding:20px;display:flex;flex-direction:column;gap:0;">
+            <div style="display:flex;gap:14px;padding-bottom:16px;position:relative;">
+              <div style="display:flex;flex-direction:column;align-items:center;">
+                <div style="width:10px;height:10px;border-radius:50%;background:#16a34a;box-shadow:0 0 6px #16a34a88;flex-shrink:0;margin-top:3px;"></div>
+                <div style="width:1px;flex:1;background:rgba(255,255,255,0.06);margin-top:6px;"></div>
+              </div>
+              <div><div style="font-size:12px;color:#4ade80;margin-bottom:2px;">March 20 · Email</div><div style="font-size:13px;color:#c8d4e8;">Client replied — positive feedback on Q1 results</div></div>
+            </div>
+            <div style="display:flex;gap:14px;padding-bottom:16px;">
+              <div style="display:flex;flex-direction:column;align-items:center;">
+                <div style="width:10px;height:10px;border-radius:50%;background:#1a6ef5;box-shadow:0 0 6px #1a6ef588;flex-shrink:0;margin-top:3px;"></div>
+                <div style="width:1px;flex:1;background:rgba(255,255,255,0.06);margin-top:6px;"></div>
+              </div>
+              <div><div style="font-size:12px;color:#7aabff;margin-bottom:2px;">March 12 · Meeting</div><div style="font-size:13px;color:#c8d4e8;">Quarterly review — agreed on new KPIs for Q2</div></div>
+            </div>
+            <div style="display:flex;gap:14px;padding-bottom:16px;">
+              <div style="display:flex;flex-direction:column;align-items:center;">
+                <div style="width:10px;height:10px;border-radius:50%;background:#d97706;flex-shrink:0;margin-top:3px;"></div>
+                <div style="width:1px;flex:1;background:rgba(255,255,255,0.06);margin-top:6px;"></div>
+              </div>
+              <div><div style="font-size:12px;color:#fbbf24;margin-bottom:2px;">March 8 · Deliverable</div><div style="font-size:13px;color:#c8d4e8;">SEO audit delivered — 2 days ahead of deadline</div></div>
+            </div>
+            <div style="display:flex;gap:14px;">
+              <div style="display:flex;flex-direction:column;align-items:center;">
+                <div style="width:10px;height:10px;border-radius:50%;background:#6b7a99;flex-shrink:0;margin-top:3px;"></div>
+              </div>
+              <div><div style="font-size:12px;color:var(--muted);margin-bottom:2px;">February 28 · Analytics</div><div style="font-size:13px;color:#c8d4e8;">Traffic report: +11% organic — best month since Q3</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 4: Churn risk -->
+      <div class="fade-in" style="display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;">
+        <div style="background:#0d1420;border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;">
+          <div style="background:#0a0f1e;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:8px;">
+            <div style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#28c840;"></div>
+            <span style="font-size:11px;color:var(--muted);margin-left:8px;">Pulse — Churn Risk</span>
+          </div>
+          <div style="padding:20px;">
+            <div style="font-size:11px;color:var(--muted);letter-spacing:0.1em;margin-bottom:14px;">RISK OVERVIEW · YOUR PORTFOLIO</div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.2);border-radius:8px;">
+                <div style="flex:1;font-size:13px;color:#e8edf5;">Maersk Group</div>
+                <div style="font-size:12px;color:#f87171;font-weight:500;">High risk · 78%</div>
+                <div style="width:60px;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;"><div style="width:78%;height:100%;background:#dc2626;border-radius:3px;"></div></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(217,119,6,0.08);border:1px solid rgba(217,119,6,0.2);border-radius:8px;">
+                <div style="flex:1;font-size:13px;color:#e8edf5;">Vestas Wind Systems</div>
+                <div style="font-size:12px;color:#fbbf24;font-weight:500;">Medium · 41%</div>
+                <div style="width:60px;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;"><div style="width:41%;height:100%;background:#d97706;border-radius:3px;"></div></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(22,163,74,0.06);border:1px solid rgba(22,163,74,0.15);border-radius:8px;">
+                <div style="flex:1;font-size:13px;color:#e8edf5;">Ørsted A/S</div>
+                <div style="font-size:12px;color:#4ade80;font-weight:500;">Low risk · 8%</div>
+                <div style="width:60px;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;"><div style="width:8%;height:100%;background:#16a34a;border-radius:3px;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px;color:#4ade80;letter-spacing:0.1em;font-weight:500;margin-bottom:12px;">COMING SOON</div>
+          <h3 style="font-size:24px;font-weight:500;color:#e8edf5;margin-bottom:12px;line-height:1.3;">Churn risk score</h3>
+          <p style="font-size:15px;color:var(--muted);line-height:1.8;">Pulse predicts which clients are at risk of leaving before they know it themselves — based on meeting frequency, response rates and result trends. Act before it's too late.</p>
+        </div>
+      </div>
+
+      <!-- Feature 5: Team overview -->
+      <div class="fade-in" style="display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;">
+        <div>
+          <div style="font-size:11px;color:#4ade80;letter-spacing:0.1em;font-weight:500;margin-bottom:12px;">COMING SOON</div>
+          <h3 style="font-size:24px;font-weight:500;color:#e8edf5;margin-bottom:12px;line-height:1.3;">Team overview</h3>
+          <p style="font-size:15px;color:var(--muted);line-height:1.8;">For sales directors: one dashboard showing the health of your entire team's client portfolio at a glance. Spot problems across account managers before they escalate.</p>
+        </div>
+        <div style="background:#0d1420;border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;">
+          <div style="background:#0a0f1e;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:8px;">
+            <div style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#28c840;"></div>
+            <span style="font-size:11px;color:var(--muted);margin-left:8px;">Pulse — Team Overview</span>
+          </div>
+          <div style="padding:20px;">
+            <div style="font-size:11px;color:var(--muted);letter-spacing:0.1em;margin-bottom:14px;">ACCOUNT MANAGERS · 4 ACTIVE</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:8px;">
+                <div style="width:28px;height:28px;border-radius:50%;background:#1a6ef5;display:flex;align-items:center;justify-content:center;font-size:11px;color:white;font-weight:500;">SJ</div>
+                <div style="flex:1;font-size:13px;color:#c8d4e8;">Sarah Jensen</div>
+                <div style="display:flex;gap:4px;"><div style="width:8px;height:8px;border-radius:50%;background:#dc2626;"></div><div style="width:8px;height:8px;border-radius:50%;background:#d97706;"></div><div style="width:8px;height:8px;border-radius:50%;background:#16a34a;"></div><div style="width:8px;height:8px;border-radius:50%;background:#16a34a;"></div></div>
+                <div style="font-size:11px;color:#f87171;">2 urgent</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:8px;">
+                <div style="width:28px;height:28px;border-radius:50%;background:#7c3aed;display:flex;align-items:center;justify-content:center;font-size:11px;color:white;font-weight:500;">MN</div>
+                <div style="flex:1;font-size:13px;color:#c8d4e8;">Mikkel Nielsen</div>
+                <div style="display:flex;gap:4px;"><div style="width:8px;height:8px;border-radius:50%;background:#16a34a;"></div><div style="width:8px;height:8px;border-radius:50%;background:#16a34a;"></div><div style="width:8px;height:8px;border-radius:50%;background:#16a34a;"></div><div style="width:8px;height:8px;border-radius:50%;background:#d97706;"></div></div>
+                <div style="font-size:11px;color:#4ade80;">All good</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:8px;">
+                <div style="width:28px;height:28px;border-radius:50%;background:#0891b2;display:flex;align-items:center;justify-content:center;font-size:11px;color:white;font-weight:500;">LH</div>
+                <div style="flex:1;font-size:13px;color:#c8d4e8;">Louise Hansen</div>
+                <div style="display:flex;gap:4px;"><div style="width:8px;height:8px;border-radius:50%;background:#dc2626;"></div><div style="width:8px;height:8px;border-radius:50%;background:#16a34a;"></div><div style="width:8px;height:8px;border-radius:50%;background:#16a34a;"></div><div style="width:8px;height:8px;border-radius:50%;background:#16a34a;"></div></div>
+                <div style="font-size:11px;color:#f87171;">1 urgent</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 6: Slack integration -->
+      <div class="fade-in" style="display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;">
+        <div style="background:#0d1420;border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;">
+          <div style="background:#0a0f1e;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:8px;">
+            <div style="width:8px;height:8px;border-radius:50%;background:#ff5f57;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#febc2e;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#28c840;"></div>
+            <span style="font-size:11px;color:var(--muted);margin-left:8px;"># pulse-alerts · Slack</span>
+          </div>
+          <div style="padding:20px;">
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              <div style="display:flex;gap:10px;align-items:flex-start;">
+                <div style="width:32px;height:32px;border-radius:8px;background:#1a6ef5;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                  <svg width="16" height="16" viewBox="0 0 16 16"><polyline points="1,8 4,8 5.5,4 7.5,12 9,6 10.5,8 14,8" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:12px 14px;flex:1;">
+                  <div style="font-size:12px;font-weight:500;color:#e8edf5;margin-bottom:4px;">Pulse <span style="font-size:10px;color:var(--muted);font-weight:400;">Today at 7:30 AM</span></div>
+                  <div style="font-size:13px;color:#c8d4e8;line-height:1.6;">Good morning Sarah. <span style="color:#f87171;">Novo Nordisk</span> needs your attention today — Q1 report is due and the meeting is tomorrow at 10am.</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:10px;align-items:flex-start;">
+                <div style="width:32px;height:32px;border-radius:8px;background:#1a6ef5;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                  <svg width="16" height="16" viewBox="0 0 16 16"><polyline points="1,8 4,8 5.5,4 7.5,12 9,6 10.5,8 14,8" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:12px 14px;flex:1;">
+                  <div style="font-size:12px;font-weight:500;color:#e8edf5;margin-bottom:4px;">Pulse <span style="font-size:10px;color:var(--muted);font-weight:400;">Yesterday at 4:15 PM</span></div>
+                  <div style="font-size:13px;color:#c8d4e8;line-height:1.6;"><span style="color:#fbbf24;">Maersk Group</span> traffic dropped 18% this month. No follow-up meeting scheduled.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px;color:#4ade80;letter-spacing:0.1em;font-weight:500;margin-bottom:12px;">COMING SOON</div>
+          <h3 style="font-size:24px;font-weight:500;color:#e8edf5;margin-bottom:12px;line-height:1.3;">Slack & Teams integration</h3>
+          <p style="font-size:15px;color:var(--muted);line-height:1.8;">Receive Pulse notifications directly in Slack or Microsoft Teams — wherever your team already communicates. No new tool to remember to open.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- ROI -->
-<div class="roi-section">
+<div id="roi" class="roi-section">
   <div class="roi-inner fade-in">
     <div>
       <div class="section-label">The business case</div>
