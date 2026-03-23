@@ -343,9 +343,8 @@
       <p style="font-size:16px;color:var(--muted);max-width:460px;margin:0 auto;">Connect once via OAuth. Pulse reads your existing data automatically — no manual input, ever.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px;">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;">
 
-      <!-- Email & Calendar — always visible -->
       <div style="background:var(--dark2);border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;align-items:center;gap:12px;">
         <div style="width:36px;height:36px;border-radius:8px;background:rgba(234,67,53,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;">📧</div>
         <div><div style="font-size:13px;font-weight:500;color:var(--text);">Gmail</div><div style="font-size:11px;color:var(--muted);">Email tracking</div></div>
@@ -366,6 +365,11 @@
         <div><div style="font-size:13px;font-weight:500;color:var(--text);">HubSpot</div><div style="font-size:11px;color:var(--muted);">CRM & deals</div></div>
       </div>
 
+    </div>
+
+    <!-- Hidden integrations -->
+    <div id="more-integrations" style="display:none;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;">
+
       <div style="background:var(--dark2);border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;align-items:center;gap:12px;">
         <div style="width:36px;height:36px;border-radius:8px;background:rgba(0,161,224,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;">☁️</div>
         <div><div style="font-size:13px;font-weight:500;color:var(--text);">Salesforce</div><div style="font-size:11px;color:var(--muted);">CRM & deals</div></div>
@@ -385,11 +389,6 @@
         <div style="width:36px;height:36px;border-radius:8px;background:rgba(10,102,194,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;">🔗</div>
         <div><div style="font-size:13px;font-weight:500;color:var(--text);">LinkedIn</div><div style="font-size:11px;color:var(--muted);">Contact tracking</div></div>
       </div>
-
-    </div>
-
-    <!-- Hidden integrations -->
-    <div id="more-integrations" style="display:none;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px;">
 
       <div style="background:var(--dark2);border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;align-items:center;gap:12px;">
         <div style="width:36px;height:36px;border-radius:8px;background:rgba(0,114,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;">📆</div>
@@ -435,7 +434,7 @@
 
     <div style="text-align:center;margin-bottom:20px;">
       <button onclick="toggleIntegrations()" id="integrations-toggle" style="background:none;border:1px solid var(--border);color:var(--muted);padding:8px 20px;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:all 0.2s;">
-        Show 8 more integrations ↓
+        Show 12 more integrations ↓
       </button>
     </div>
 
@@ -637,7 +636,7 @@
     const btn = document.getElementById('integrations-toggle');
     const isHidden = more.style.display === 'none';
     more.style.display = isHidden ? 'grid' : 'none';
-    btn.textContent = isHidden ? 'Show less ↑' : 'Show 8 more integrations ↓';
+    btn.textContent = isHidden ? 'Show less ↑' : 'Show 12 more integrations ↓';
   }
 
   const observer = new IntersectionObserver((entries) => {
