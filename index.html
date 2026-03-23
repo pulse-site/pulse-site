@@ -515,6 +515,8 @@
     padding: 32px;
     position: relative;
     animation: modalIn 0.2s ease both;
+    max-height: 90vh;
+    overflow-y: auto;
   }
 
   @keyframes modalIn {
@@ -785,6 +787,10 @@
       <div class="modal-row"><span class="modal-row-label">Traffic trend</span><span class="modal-row-value" id="modal-traffic"></span></div>
     </div>
     <div class="modal-section">
+      <div class="modal-section-label">System breakdown</div>
+      <div id="modal-systems"></div>
+    </div>
+    <div class="modal-section">
       <div class="modal-ai-label">AI recommendation</div>
       <div class="modal-ai" id="modal-ai"></div>
     </div>
@@ -847,33 +853,68 @@
       name: 'Novo Nordisk A/S', dotClass: 's-red', tagClass: 'tag-red', tagText: 'Act now',
       lastMeeting: 'March 3, 2026', nextMeeting: 'March 25, 2026 — in 2 days',
       lastEmail: 'March 18, 2026', deliverables: '2 overdue', traffic: '↑ +4% this month',
-      ai: 'Your meeting is in 2 days and no deliverables have been sent. Send the Q1 report today and confirm the agenda by tomorrow morning.'
+      ai: 'Your meeting is in 2 days and no deliverables have been sent. Send the Q1 report today and confirm the agenda by tomorrow morning.',
+      systems: [
+        { name: 'Gmail', status: 'red', issue: 'Client email from March 15 unanswered — 7 days overdue' },
+        { name: 'Google Calendar', status: 'red', issue: 'Meeting on March 25 has no agenda attached' },
+        { name: 'CRM', status: 'red', issue: '2 deliverables marked overdue: Q1 Report and SEO Audit' },
+        { name: 'Google Analytics', status: 'green', issue: 'Traffic up 4% — no issues detected' },
+      ]
     },
     maersk: {
       name: 'Maersk Group', dotClass: 's-amber', tagClass: 'tag-amber', tagText: 'Watch',
       lastMeeting: 'February 28, 2026', nextMeeting: 'Not scheduled',
       lastEmail: 'March 15, 2026', deliverables: '1 pending', traffic: '↓ −18% this month',
-      ai: 'Traffic is down 18% and no follow-up meeting is booked. Reach out this week with a brief performance summary and propose a call to align on next steps.'
+      ai: 'Traffic is down 18% and no follow-up meeting is booked. Reach out this week with a brief performance summary and propose a call to align on next steps.',
+      systems: [
+        { name: 'Google Analytics', status: 'red', issue: 'Organic traffic down 18% over 30 days — needs explanation' },
+        { name: 'Google Calendar', status: 'amber', issue: 'No follow-up meeting scheduled since last session Feb 28' },
+        { name: 'CRM', status: 'amber', issue: '1 deliverable pending: Monthly performance summary' },
+        { name: 'Gmail', status: 'green', issue: 'Last reply received March 15 — within normal range' },
+      ]
     },
     vestas: {
       name: 'Vestas Wind Systems', dotClass: 's-amber', tagClass: 'tag-amber', tagText: 'Watch',
       lastMeeting: 'March 5, 2026', nextMeeting: 'April 2, 2026',
       lastEmail: 'March 9, 2026 — 14 days ago', deliverables: 'All delivered', traffic: '→ Stable',
-      ai: 'No email contact for 14 days. Send a brief check-in message this week to keep the relationship warm before your April meeting.'
+      ai: 'No email contact for 14 days. Send a brief check-in message this week to keep the relationship warm before your April meeting.',
+      systems: [
+        { name: 'Gmail', status: 'amber', issue: 'No email exchange in 14 days — communication cooling' },
+        { name: 'Google Calendar', status: 'green', issue: 'Next meeting confirmed for April 2' },
+        { name: 'CRM', status: 'green', issue: 'All deliverables completed and logged' },
+        { name: 'Google Analytics', status: 'green', issue: 'Traffic stable — no significant changes' },
+      ]
     },
     orsted: {
       name: 'Ørsted A/S', dotClass: 's-green', tagClass: 'tag-green', tagText: 'On track',
       lastMeeting: 'March 12, 2026', nextMeeting: 'March 26, 2026',
       lastEmail: 'March 20, 2026', deliverables: 'All delivered on time', traffic: '↑ +11% this month',
-      ai: 'Everything is on track. Prepare a short wins summary for your meeting on March 26 to reinforce the value you\'re delivering.'
+      ai: 'Everything is on track. Prepare a short wins summary for your meeting on March 26 to reinforce the value you\'re delivering.',
+      systems: [
+        { name: 'Gmail', status: 'green', issue: 'Active communication — last reply March 20' },
+        { name: 'Google Calendar', status: 'green', issue: 'Meeting confirmed for March 26 with agenda set' },
+        { name: 'CRM', status: 'green', issue: 'All deliverables on time — nothing overdue' },
+        { name: 'Google Analytics', status: 'green', issue: 'Traffic up 11% — strong positive trend' },
+      ]
     },
     danske: {
       name: 'Danske Bank', dotClass: 's-green', tagClass: 'tag-green', tagText: 'On track',
       lastMeeting: 'March 10, 2026', nextMeeting: 'April 7, 2026',
       lastEmail: 'March 19, 2026', deliverables: 'All delivered', traffic: '↑ +23% this month',
-      ai: 'Strong results and an active relationship. Consider sharing a case study or upsell opportunity before your April meeting while momentum is high.'
+      ai: 'Strong results and an active relationship. Consider sharing a case study or upsell opportunity before your April meeting while momentum is high.',
+      systems: [
+        { name: 'Gmail', status: 'green', issue: 'Regular communication — last reply March 19' },
+        { name: 'Google Calendar', status: 'green', issue: 'Next meeting April 7 — confirmed' },
+        { name: 'CRM', status: 'green', issue: 'All deliverables completed ahead of schedule' },
+        { name: 'Google Analytics', status: 'green', issue: 'Traffic up 23% — best performing client this month' },
+      ]
     }
   };
+
+  const sysColors = { red: '#dc2626', amber: '#d97706', green: '#16a34a' };
+  const sysBg = { red: 'rgba(220,38,38,0.08)', amber: 'rgba(217,119,6,0.08)', green: 'rgba(22,163,74,0.06)' };
+  const sysBorder = { red: 'rgba(220,38,38,0.2)', amber: 'rgba(217,119,6,0.2)', green: 'rgba(22,163,74,0.15)' };
+  const sysText = { red: '#f87171', amber: '#fbbf24', green: '#4ade80' };
 
   function openClient(id) {
     const c = clients[id];
@@ -889,6 +930,19 @@
     document.getElementById('modal-deliverables').textContent = c.deliverables;
     document.getElementById('modal-traffic').textContent = c.traffic;
     document.getElementById('modal-ai').textContent = c.ai;
+
+    // Render system breakdown
+    const sysContainer = document.getElementById('modal-systems');
+    sysContainer.innerHTML = c.systems.map(s => `
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:8px;background:${sysBg[s.status]};border:1px solid ${sysBorder[s.status]};margin-bottom:8px;">
+        <div style="width:8px;height:8px;border-radius:50%;background:${sysColors[s.status]};box-shadow:0 0 6px ${sysColors[s.status]}88;margin-top:5px;flex-shrink:0;"></div>
+        <div>
+          <div style="font-size:11px;font-weight:500;color:${sysText[s.status]};letter-spacing:0.08em;margin-bottom:3px;">${s.name}</div>
+          <div style="font-size:13px;color:#b0bdd0;line-height:1.5;">${s.issue}</div>
+        </div>
+      </div>
+    `).join('');
+
     document.getElementById('clientModal').classList.add('open');
   }
 
