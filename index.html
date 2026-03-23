@@ -492,6 +492,73 @@
   }
   .fade-in.visible { opacity: 1; transform: translateY(0); }
 
+  /* CLICKABLE ROWS */
+  .dash-row { cursor: pointer; }
+  .dash-row:hover { background: rgba(255,255,255,0.06); }
+
+  /* MODAL OVERLAY */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(6px);
+    align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: #111827;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    width: 100%; max-width: 560px;
+    padding: 32px;
+    position: relative;
+    animation: modalIn 0.2s ease both;
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(16px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .modal-close {
+    position: absolute; top: 20px; right: 20px;
+    background: rgba(255,255,255,0.06);
+    border: none; color: var(--muted);
+    width: 28px; height: 28px; border-radius: 6px;
+    font-size: 16px; cursor: pointer; line-height: 28px; text-align: center;
+    transition: background 0.15s;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+  .modal-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+  .modal-name { font-size: 18px; font-weight: 500; color: #fff; }
+  .modal-status { font-size: 11px; padding: 4px 12px; border-radius: 100px; font-weight: 500; letter-spacing: 0.06em; }
+
+  .modal-section { margin-bottom: 20px; }
+  .modal-section-label { font-size: 10px; letter-spacing: 0.16em; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
+
+  .modal-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; }
+  .modal-row:last-child { border-bottom: none; }
+  .modal-row-label { color: var(--muted); }
+  .modal-row-value { color: #e8edf5; font-weight: 400; }
+
+  .modal-ai {
+    background: rgba(26,110,245,0.08);
+    border: 1px solid rgba(26,110,245,0.2);
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 13px;
+    color: #b8ccf0;
+    line-height: 1.7;
+  }
+
+  .modal-ai-label {
+    font-size: 10px; letter-spacing: 0.14em; color: #7aabff;
+    text-transform: uppercase; margin-bottom: 8px; font-weight: 500;
+  }
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     nav { padding: 16px 20px; }
@@ -544,31 +611,31 @@
             <div class="dash-sub">Sorted by urgency — updated 2 min ago</div>
           </div>
         </div>
-        <div class="dash-row">
+        <div class="dash-row" onclick="openClient('novo')">
           <div class="status-dot s-red"></div>
           <div class="dash-client">Novo Nordisk A/S</div>
           <div class="dash-note">Meeting in 2 days — no deliverables sent</div>
           <span class="dash-tag tag-red">Act now</span>
         </div>
-        <div class="dash-row">
+        <div class="dash-row" onclick="openClient('maersk')">
           <div class="status-dot s-amber"></div>
           <div class="dash-client">Maersk Group</div>
           <div class="dash-note">Traffic down 18% — no follow-up scheduled</div>
           <span class="dash-tag tag-amber">Watch</span>
         </div>
-        <div class="dash-row">
+        <div class="dash-row" onclick="openClient('vestas')">
           <div class="status-dot s-amber"></div>
           <div class="dash-client">Vestas Wind Systems</div>
           <div class="dash-note">Last email 14 days ago</div>
           <span class="dash-tag tag-amber">Watch</span>
         </div>
-        <div class="dash-row">
+        <div class="dash-row" onclick="openClient('orsted')">
           <div class="status-dot s-green"></div>
           <div class="dash-client">Ørsted A/S</div>
           <div class="dash-note">All deliverables on track — next meeting set</div>
           <span class="dash-tag tag-green">On track</span>
         </div>
-        <div class="dash-row">
+        <div class="dash-row" onclick="openClient('danske')">
           <div class="status-dot s-green"></div>
           <div class="dash-client">Danske Bank</div>
           <div class="dash-note">Results up 23% — strong relationship</div>
@@ -690,14 +757,38 @@
   <div class="section-label">Get in touch</div>
   <h2>Let's talk.</h2>
   <p>We're currently onboarding our first customers. If you manage a sales team and want to see Pulse in action, reach out.</p>
-  <form class="contact-form" onsubmit="handleSubmit(event)">
-    <input type="text" placeholder="Your name" required>
-    <input type="email" placeholder="Work email" required>
-    <input type="text" placeholder="Company">
-    <textarea placeholder="Tell us briefly about your team"></textarea>
+  <form class="contact-form">
+    <input type="text" name="name" placeholder="Your name" required>
+    <input type="email" name="email" placeholder="Work email" required>
+    <input type="text" name="company" placeholder="Company">
+    <textarea name="message" placeholder="Tell us briefly about your team"></textarea>
     <button type="submit" class="form-submit">Send message →</button>
   </form>
   <p id="form-thanks" style="display:none; color:#4ade80; margin-top:20px; font-size:15px;">Thanks — we'll be in touch shortly.</p>
+</div>
+
+<!-- CLIENT MODAL -->
+<div class="modal-overlay" id="clientModal" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('clientModal').classList.remove('open')">✕</button>
+    <div class="modal-header">
+      <div class="status-dot" id="modal-dot"></div>
+      <div class="modal-name" id="modal-name"></div>
+      <span class="modal-status dash-tag" id="modal-tag"></span>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-label">Relationship overview</div>
+      <div class="modal-row"><span class="modal-row-label">Last meeting</span><span class="modal-row-value" id="modal-last-meeting"></span></div>
+      <div class="modal-row"><span class="modal-row-label">Next meeting</span><span class="modal-row-value" id="modal-next-meeting"></span></div>
+      <div class="modal-row"><span class="modal-row-label">Last email</span><span class="modal-row-value" id="modal-last-email"></span></div>
+      <div class="modal-row"><span class="modal-row-label">Open deliverables</span><span class="modal-row-value" id="modal-deliverables"></span></div>
+      <div class="modal-row"><span class="modal-row-label">Traffic trend</span><span class="modal-row-value" id="modal-traffic"></span></div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-ai-label">AI recommendation</div>
+      <div class="modal-ai" id="modal-ai"></div>
+    </div>
+  </div>
 </div>
 
 <!-- FOOTER -->
@@ -722,15 +813,94 @@
       }
     });
   }, { threshold: 0.1 });
-
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-  // Form
-  function handleSubmit(e) {
+  // Formspree contact form
+  const form = document.querySelector('.contact-form');
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    e.target.style.display = 'none';
-    document.getElementById('form-thanks').style.display = 'block';
+    const btn = form.querySelector('.form-submit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    try {
+      const res = await fetch('https://formspree.io/f/mojkordd', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      });
+      if (res.ok) {
+        form.style.display = 'none';
+        document.getElementById('form-thanks').style.display = 'block';
+      } else {
+        btn.textContent = 'Something went wrong — try again';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Something went wrong — try again';
+      btn.disabled = false;
+    }
+  });
+
+  // Client modal data
+  const clients = {
+    novo: {
+      name: 'Novo Nordisk A/S', dotClass: 's-red', tagClass: 'tag-red', tagText: 'Act now',
+      lastMeeting: 'March 3, 2026', nextMeeting: 'March 25, 2026 — in 2 days',
+      lastEmail: 'March 18, 2026', deliverables: '2 overdue', traffic: '↑ +4% this month',
+      ai: 'Your meeting is in 2 days and no deliverables have been sent. Send the Q1 report today and confirm the agenda by tomorrow morning.'
+    },
+    maersk: {
+      name: 'Maersk Group', dotClass: 's-amber', tagClass: 'tag-amber', tagText: 'Watch',
+      lastMeeting: 'February 28, 2026', nextMeeting: 'Not scheduled',
+      lastEmail: 'March 15, 2026', deliverables: '1 pending', traffic: '↓ −18% this month',
+      ai: 'Traffic is down 18% and no follow-up meeting is booked. Reach out this week with a brief performance summary and propose a call to align on next steps.'
+    },
+    vestas: {
+      name: 'Vestas Wind Systems', dotClass: 's-amber', tagClass: 'tag-amber', tagText: 'Watch',
+      lastMeeting: 'March 5, 2026', nextMeeting: 'April 2, 2026',
+      lastEmail: 'March 9, 2026 — 14 days ago', deliverables: 'All delivered', traffic: '→ Stable',
+      ai: 'No email contact for 14 days. Send a brief check-in message this week to keep the relationship warm before your April meeting.'
+    },
+    orsted: {
+      name: 'Ørsted A/S', dotClass: 's-green', tagClass: 'tag-green', tagText: 'On track',
+      lastMeeting: 'March 12, 2026', nextMeeting: 'March 26, 2026',
+      lastEmail: 'March 20, 2026', deliverables: 'All delivered on time', traffic: '↑ +11% this month',
+      ai: 'Everything is on track. Prepare a short wins summary for your meeting on March 26 to reinforce the value you\'re delivering.'
+    },
+    danske: {
+      name: 'Danske Bank', dotClass: 's-green', tagClass: 'tag-green', tagText: 'On track',
+      lastMeeting: 'March 10, 2026', nextMeeting: 'April 7, 2026',
+      lastEmail: 'March 19, 2026', deliverables: 'All delivered', traffic: '↑ +23% this month',
+      ai: 'Strong results and an active relationship. Consider sharing a case study or upsell opportunity before your April meeting while momentum is high.'
+    }
+  };
+
+  function openClient(id) {
+    const c = clients[id];
+    document.getElementById('modal-name').textContent = c.name;
+    const dot = document.getElementById('modal-dot');
+    dot.className = 'status-dot ' + c.dotClass;
+    const tag = document.getElementById('modal-tag');
+    tag.className = 'modal-status dash-tag ' + c.tagClass;
+    tag.textContent = c.tagText;
+    document.getElementById('modal-last-meeting').textContent = c.lastMeeting;
+    document.getElementById('modal-next-meeting').textContent = c.nextMeeting;
+    document.getElementById('modal-last-email').textContent = c.lastEmail;
+    document.getElementById('modal-deliverables').textContent = c.deliverables;
+    document.getElementById('modal-traffic').textContent = c.traffic;
+    document.getElementById('modal-ai').textContent = c.ai;
+    document.getElementById('clientModal').classList.add('open');
   }
+
+  function closeModal(e) {
+    if (e.target === document.getElementById('clientModal')) {
+      document.getElementById('clientModal').classList.remove('open');
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') document.getElementById('clientModal').classList.remove('open');
+  });
 </script>
 </body>
 </html>
