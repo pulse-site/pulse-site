@@ -636,8 +636,67 @@
       <text x="29" y="13" style="font-family:'DM Sans',sans-serif;font-weight:500;font-size:13px;fill:#6b7a99;letter-spacing:0.04em;">Pulse</text>
     </svg>
   </a>
-  <div class="footer-copy">© 2026 Pulse. All rights reserved.</div>
+  <div style="display:flex;gap:20px;align-items:center;">
+    <button onclick="document.getElementById('privacyModal').classList.add('open')" style="background:none;border:none;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;transition:color 0.2s;" onmouseover="this.style.color='#e8edf5'" onmouseout="this.style.color='#6b7a99'">Privacy Policy</button>
+    <div class="footer-copy">© 2026 Pulse. All rights reserved.</div>
+  </div>
 </footer>
+
+<!-- PRIVACY POLICY MODAL -->
+<div class="modal-overlay" id="privacyModal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal" style="max-width:640px;">
+    <button class="modal-close" onclick="document.getElementById('privacyModal').classList.remove('open')">✕</button>
+    <div style="margin-bottom:24px;">
+      <div style="font-size:11px;color:#7aabff;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:8px;">Legal</div>
+      <div style="font-size:22px;font-weight:500;color:#fff;">Privacy Policy</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px;">Last updated: March 2026</div>
+    </div>
+
+    <div style="font-size:13px;color:#b8ccf0;line-height:1.8;display:flex;flex-direction:column;gap:20px;">
+
+      <div>
+        <div style="font-size:13px;font-weight:500;color:#e8edf5;margin-bottom:6px;">1. Who we are</div>
+        <p>Pulse is an AI-powered client relationship monitoring tool. We are the data controller for the personal data collected through this website. If you have questions about this policy, contact us via the contact form on this page.</p>
+      </div>
+
+      <div>
+        <div style="font-size:13px;font-weight:500;color:#e8edf5;margin-bottom:6px;">2. What data we collect</div>
+        <p>When you submit our contact form, we collect your name, work email address, company name and role. We do not collect any other personal data through this website.</p>
+      </div>
+
+      <div>
+        <div style="font-size:13px;font-weight:500;color:#e8edf5;margin-bottom:6px;">3. Why we collect it</div>
+        <p>We collect this information solely to respond to your inquiry. We do not use it for marketing, profiling or any other purpose without your explicit consent.</p>
+      </div>
+
+      <div>
+        <div style="font-size:13px;font-weight:500;color:#e8edf5;margin-bottom:6px;">4. How long we keep it</div>
+        <p>We retain your contact information for up to 12 months after your last interaction with us. After that, it is permanently deleted.</p>
+      </div>
+
+      <div>
+        <div style="font-size:13px;font-weight:500;color:#e8edf5;margin-bottom:6px;">5. Who we share it with</div>
+        <p>Your data is processed by Formspree (our contact form provider) and stored securely. We never sell or share your personal data with third parties for commercial purposes.</p>
+      </div>
+
+      <div>
+        <div style="font-size:13px;font-weight:500;color:#e8edf5;margin-bottom:6px;">6. Your rights</div>
+        <p>Under GDPR, you have the right to access, correct or delete your personal data at any time. You also have the right to object to processing and to data portability. To exercise these rights, contact us via the form on this website.</p>
+      </div>
+
+      <div>
+        <div style="font-size:13px;font-weight:500;color:#e8edf5;margin-bottom:6px;">7. Cookies</div>
+        <p>This website uses functional cookies necessary for the contact form to work. No tracking or advertising cookies are used without your consent.</p>
+      </div>
+
+      <div>
+        <div style="font-size:13px;font-weight:500;color:#e8edf5;margin-bottom:6px;">8. Changes to this policy</div>
+        <p>We may update this policy as our product evolves. We will always display the date of the latest update at the top of this page.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <div class="modal-overlay" id="clientModal" onclick="closeModal(event)">
   <div class="modal">
